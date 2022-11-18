@@ -17,10 +17,10 @@ func main() {
 
 	db.DBConnection()
 
-	//usando los modelos qie creamos , que ejecute y cree las tablas
+	//usando los modelos que creamos , que ejecute y cree las tablas
 
-	db.DB.AutoMigrate(models.Tarea{})   //importamos la estrcutura
-	db.DB.AutoMigrate(models.Usuario{}) //importamos la estrcutura
+	db.DB.AutoMigrate(models.Tarea{})   //importamos la estrcutura Tarea
+	db.DB.AutoMigrate(models.Usuario{}) //importamos la estrcutura Usuario
 
 	//usamos el paquete gorilla mux para crear las rutas
 	r := mux.NewRouter()

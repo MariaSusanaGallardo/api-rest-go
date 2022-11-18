@@ -1,0 +1,49 @@
+#deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: 
+    kubernetes.io/change-cause: "v1"
+  name: api-rest-ejercicio
+  labels:
+    app: api-rest
+
+#replicasets
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-rest
+
+#pod
+  template:
+    metadata:
+      labels:
+        app: api-rest
+    spec:
+      containers:
+      - name: api-rest
+        image: api-rest-ejercicio
+
+--- 
+
+#servicio 
+
+apiVersion: v1  #revisar versión y modo de agregarla con kubectl api-versions
+kind: Service #revisar kind con kubectl api-resources
+metadata:
+  name: api-rest-ejercicio
+  labels:
+    app: api-rest #por este label observará los pods
+spec:
+  type: ClusterIP
+  selector:
+    app: api-rest
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000 #a que puerto dentro del contenedor o del pod, vamos a consumir
+
+
+ 
